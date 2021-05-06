@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{461BC7E4-03E1-4546-91AC-F44830693DBB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Love.Services</RootNamespace>
+    <AssemblyName>Love.Services</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MongoDB.Bson, Version=2.12.2.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Love.Dekstop\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\SessionService.cs" />
+    <Compile Include="Auth\TokenService.cs" />
+    <Compile Include="Base\BaseService.cs" />
+    <Compile Include="Crypt\AesCrypt.cs" />
+    <Compile Include="Crypt\CryptoRandomaizert.cs" />
+    <Compile Include="Crypt\HashService.cs" />
+    <Compile Include="Crypt\RsaService.cs" />
+    <Compile Include="Http\AuthRequest.cs" />
+    <Compile Include="Http\BaseHttpRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StateServices\RegistrationStateService.cs" />
+    <Compile Include="StateServices\SessionStateService.cs" />
+    <Compile Include="StateServices\StateContainer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messanger\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Love.Db\Love.Db.csproj">
+      <Project>{AF138265-E87E-4211-85B4-6EC6B180CF15}</Project>
+      <Name>Love.Db</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Love.Models\Love.Models.csproj">
+      <Project>{de08eb5a-db70-45dd-85f4-60591482450c}</Project>
+      <Name>Love.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Love.Providers\Love.Providers.csproj">
+      <Project>{1a239fc1-cd8b-425c-b703-34e8881f27b2}</Project>
+      <Name>Love.Providers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Love.Utils\Love.Utils.csproj">
+      <Project>{cc64a810-64c3-4e0a-9a19-41fd1815f238}</Project>
+      <Name>Love.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
