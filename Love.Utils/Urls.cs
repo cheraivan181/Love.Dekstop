@@ -14,5 +14,7 @@ namespace Love.Utils
         public static string ConfirmPhoneTestUrl = "Tester/confirmPhone";
 
         public static string GetAuthUserInfoUrl = "Account/getauthuserinfo";
+        public static string CreateFirstSessionUrl = "MessangerSession/createfirstsession";
+        public static string CreateSessionUrl = "MessangerSession/createsession";
     }
 }

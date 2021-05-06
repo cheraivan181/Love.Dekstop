@@ -21,16 +21,22 @@ namespace Love.Services.StateServices
             return sessionStateService;
         }
 
-        public Task GetStateAsync()
-        {
-            return stateProvider.GetStateAsync();
-        }
+       
+        public byte[] StrongKey { get; set; }
+        public string ClientPrivateKey { get; set; }
+        public string ClientPublicKey { get; set; }
+        public string ServerPublicKey { get; set; }
+        public string AcessToken { get; set; }
 
-        public async Task SetStateAsync(byte[] strongKey, string clientPrivateKey, string clientPublicKey,
+        public void SetStateAsync(byte[] strongKey, string clientPrivateKey, string clientPublicKey,
             string serverPublicKey,
             string acessToken)
         {
-            await stateProvider.SetStateAsync(strongKey, clientPrivateKey, clientPublicKey, serverPublicKey, acessToken);
+            this.StrongKey = strongKey;
+            this.ClientPrivateKey = ClientPrivateKey;
+            this.ClientPublicKey = clientPublicKey;
+            this.ServerPublicKey = serverPublicKey;
+            this.AcessToken = acessToken;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Love.Services.Http
             httpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("devUrl"));
         }
 
-        protected HttpRequestMessage BuildRequestMessage(string uri,
+        public HttpRequestMessage BuildRequestMessage(string uri,
             HttpMethod method,
             string content = null)
         {

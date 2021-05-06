@@ -12,6 +12,7 @@ namespace Love.Db
     {
         [BsonId]
         public string UserId { get; set; }
+        public string SessionId { get; set; }
         public string ClientPublicKey { get; set; }
         public string ClientPrivateKey { get; set; }
         public string ServerPublicKey { get; set; }

@@ -29,6 +29,11 @@ namespace Love.Providers
             return strongKey;
         }
 
+        public async Task CreateSessionAsync(Session session)
+        {
+            await Sessions.InsertOneAsync(session);
+        }
+
         public async Task<Session> GetSessionAsync(string id)
         {
             var filter = new BsonDocument("UserId", id);

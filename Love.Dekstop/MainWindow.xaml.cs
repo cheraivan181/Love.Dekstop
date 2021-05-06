@@ -86,7 +86,7 @@ namespace Love.Dekstop
 
 					string acessToken = await tokenService.MakeAuthTokenAsync(currentUser.Id);
 
-					await stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
+					stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
 						clientPublicKey: session.ClientPublicKey, serverPublicKey: session.ServerPublicKey,
 						acessToken: acessToken);
 

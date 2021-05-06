@@ -9,7 +9,6 @@ namespace Love.Db
 {
     public class SessionState
     {
-        public ObjectId Id { get; set; }
         public byte[] StrongKey { get; set; }
         public string ClientPrivateKey { get; set; }
         public string ClientPublicKey { get; set; }
