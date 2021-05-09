@@ -6,7 +6,6 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -36,23 +35,18 @@ namespace Love.Services.Auth
             authRequest = new AuthRequest(authStorage.AcessToken);
             var requestMessage = new HttpRequestMessage();
             requestMessage.Method = HttpMethod.Get;
-            requestMessage.RequestUri = new Uri(ConfigurationManager.AppSettings.Get("devUrl") + Urls.GetAuthUserInfoUrl);
+            requestMessage.RequestUri = new Uri(Urls.GetAuthUserInfoUrl);
 
             var responseUserInfo = await authRequest.httpClient.SendAsync(requestMessage);
 
             if (responseUserInfo.StatusCode == HttpStatusCode.OK && !isNeedAuth)
                 return authStorage.AcessToken;
 
-            string content = JsonConvert.SerializeObject(new
-            {
-                refreshToken = authStorage.RefreshToken
-            });
-
             var updateLongSessionRequestMessage = new HttpRequestMessage();
 
             updateLongSessionRequestMessage.Method = HttpMethod.Post;
-            updateLongSessionRequestMessage.RequestUri = new Uri(ConfigurationManager.AppSettings.Get("devUrl") + Urls.LongSessionUpdateUrl);
-            updateLongSessionRequestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
+            updateLongSessionRequestMessage.RequestUri = new Uri(Urls.LongSessionUpdateUrl);
+            updateLongSessionRequestMessage.Content = new StringContent(authStorage.RefreshToken, Encoding.UTF8, "application/json");
 
             var updateLongSessionResponse = await authRequest.httpClient.SendAsync(updateLongSessionRequestMessage);
             if (updateLongSessionResponse.StatusCode == HttpStatusCode.OK)

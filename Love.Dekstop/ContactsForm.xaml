@@ -5,8 +5,136 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Love.Dekstop"
         mc:Ignorable="d"
-        Title="ContactsForm" Height="450" Width="800">
-    <Grid>
+        Title="Zalupa" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="Screen">
+            <Style.Setters>
+                <Setter Property="Border.Visibility" Value="Hidden" />
+                <Setter Property="Border.Background" Value="#151515" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="TextBlockBase">
+            <Style.Setters>
+                <Setter Property="TextBlock.Padding" Value="11"/>
+                <Setter Property="TextBlock.Margin" Value="0" />
+                <Setter Property="TextBlock.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBlock.FontSize" Value="12" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="HeadText" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.FontWeight" Value="Bold" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="LastMessage" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.Foreground" Value="Gray" />
+                <Setter Property="TextBlock.Padding"  Value="5,0,0,0"/>
+            </Style.Setters>
+        </Style>
         
-    </Grid>
+        <Style x:Key="UserName" BasedOn="{StaticResource LastMessage}">
+            <Style.Setters>
+                <Setter Property="TextBlock.Foreground"  Value="#f6f6f6"/>
+                <Setter Property="TextBlock.Padding"  Value="5,0,0,10"/>
+            </Style.Setters>   
+        </Style>
+
+        <Style x:Key="TextBoxBase">
+            <Style.Setters>
+                <Setter Property="TextBox.Background" Value="#333" />
+                <Setter Property="TextBox.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBox.Margin" Value="11"/>
+                <Setter Property="TextBox.Padding" Value="8 4"/>
+                <Setter Property="TextBox.HorizontalAlignment" Value="Center" />
+                <Setter Property="TextBox.MinWidth" Value="220" />
+                <Setter Property="TextBox.MinHeight" Value="15" />
+            </Style.Setters>
+        </Style>
+
+    </Window.Resources>
+
+    <Border Style="{StaticResource Screen}" Name="BackGround" Visibility="Visible">
+        <Grid Grid.IsSharedSizeScope="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Left" 
+                          Width="2" Background="DarkRed" ResizeDirection="Columns"
+                          Grid.RowSpan="3" VerticalAlignment="Stretch"/>
+            <StackPanel Grid.Row="0" Grid.Column="0" 
+                        MinHeight="55" MaxHeight="55"
+                        MinWidth="250" 
+                        Orientation="Horizontal" Margin="0,0,0,0">
+                <Button Height="30" Width="30"/>
+                <TextBox Style="{StaticResource ResourceKey=TextBoxBase}" FontSize="12"
+                         ClipToBounds="True"/>
+            </StackPanel>
+            <ListBox Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" 
+                      x:Name="ContactsList" Background="#151515" 
+                      BorderThickness="0">
+            <ListBoxItem>
+                <StackPanel Orientation="Horizontal">
+                        
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource UserName}" Text="Pendos" ></TextBlock>
+                        <TextBlock Style="{StaticResource LastMessage}" Text="Last Message From Pendos"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                </ListBoxItem>
+
+            </ListBox>
+            <StackPanel Grid.Column="2" Grid.Row="0"  >
+                <TextBlock Style="{StaticResource HeadText}" >Pendos</TextBlock>
+            </StackPanel>
+            <ScrollViewer Grid.Column="2" Grid.Row="1"  Background="Black">
+                <StackPanel>
+                    <Border Padding="10,10,80,10"  >
+                        <Grid>
+                            <Border Background="#151515" CornerRadius="10" Width="Auto">
+                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
+                                           Style="{StaticResource HeadText}"
+                                           Margin="0,0,30,0">
+                                    Zalupa
+                                </TextBlock>
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <Border Padding="80,10,10,10" >
+                            <Grid>
+                                <Border Background="#353535" CornerRadius="10" Width="Auto">
+                                    <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
+                                               Style="{StaticResource HeadText}"
+                                               Margin="0,0,30,0">
+                                        Zalupa
+                                    </TextBlock>
+                                </Border>
+                            </Grid>
+                        </Border>
+                </StackPanel>
+            </ScrollViewer>
+            <Grid Grid.Column="2" Grid.Row="2"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Stretch"></TextBox>
+                <Button Grid.Column="1" Grid.Row="0" Width="20" Height="20" ></Button>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

@@ -17,5 +17,12 @@ namespace Love.Services.Http
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", acessToken);
         }
 
+        public AuthRequest()
+        {
+            var stateProvider = new StateProvider();
+            var state = AsyncHelper.RunSync(() => stateProvider.GetStateAsync());
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", state.AcessToken);
+        }
+
     }
 }

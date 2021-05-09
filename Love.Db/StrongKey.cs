@@ -11,7 +11,7 @@ namespace Love.Db
     public class StrongKey
     {
         [BsonId]
-        public string UserId { get; set; }
+        public Guid UserId { get; set; }
         public byte[] Key { get; set; }
     }
 }

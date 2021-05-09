@@ -12,9 +12,18 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Love.Dekstop
 {
@@ -77,19 +86,18 @@ namespace Love.Dekstop
 
 					string acessToken = await tokenService.MakeAuthTokenAsync(currentUser.Id);
 
-					stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
+					await stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
 						clientPublicKey: session.ClientPublicKey, serverPublicKey: session.ServerPublicKey,
 						acessToken: acessToken);
 
 					ContactsForm contactForm = new ContactsForm();
 					contactForm.Show();
-					Close();
 				}
 				else
                 {
 					var httpRequestMessage = new HttpRequestMessage();
 					httpRequestMessage.Method = HttpMethod.Post;
-					httpRequestMessage.RequestUri = new Uri(ConfigurationManager.AppSettings.Get("devUrl") + Urls.AuthUrl);
+					httpRequestMessage.RequestUri = new Uri(Urls.AuthUrl);
 
 					var form = new MultipartFormDataContent();
 
@@ -105,12 +113,6 @@ namespace Love.Dekstop
 							LoginMessageBlock.Text = "Wrong login or password!";
 							LoginMessageBlock.Visibility = Visibility.Visible;
 							break;
-						case HttpStatusCode.Unauthorized:
-
-							LoginMessageBlock.Text = "Wrong login or password!";
-							LoginMessageBlock.Visibility = Visibility.Visible;
-
-							break;
 						case HttpStatusCode.InternalServerError:
 							LoginMessageBlock.Text = "Internal server error!";
 							LoginMessageBlock.Visibility = Visibility.Visible;
@@ -119,18 +121,14 @@ namespace Love.Dekstop
 
 							string content = await authResponse.Content.ReadAsStringAsync();
 							var authResult = JsonConvert.DeserializeObject<AuthResult>(content);
-
-							await userProvider.СreateOrUpdateAuthStorageAsync(authResult.UserId, authResult.AccessToken, authResult.RefreshToken);
-
-							var sessionService = new SessionService(authResult.UserId);
-							await sessionService.MakeSessionAsync(authResult.AccessToken, authResult.RefreshToken);
-
-							await userProvider.CreateUserAsync(authResult.UserId, LoginBox.Text, HashService.GetHash(PasswordBox.Password));
+							
+							await userProvider.CreateAsync(authResult.UserId, authResult.AccessToken, authResult.RefreshToken);
+							
+							//алгоритм получения уже существующей сессии тут
 
 							ContactsForm contactForm = new ContactsForm();
 							contactForm.Show();
-							Close();
-						
+
 							break;
 					}
 				}
@@ -139,7 +137,7 @@ namespace Love.Dekstop
             {
 				var httpRequest = new HttpRequestMessage();
 				httpRequest.Method = HttpMethod.Post;
-				httpRequest.RequestUri = new Uri(ConfigurationManager.AppSettings.Get("devUrl") + Urls.RegisterUrl);
+				httpRequest.RequestUri = new Uri(Urls.RegisterUrl);
 
 				var form = new MultipartFormDataContent();
 
@@ -149,7 +147,6 @@ namespace Love.Dekstop
 				httpRequest.Content = form;
 				
 				var registerResult = await baseHttpRequest.httpClient.SendAsync(httpRequest);
-				
 
 				switch (registerResult.StatusCode)
                 {
@@ -163,22 +160,14 @@ namespace Love.Dekstop
 
 						var phoneConfirmRequestMessage = new HttpRequestMessage();
 						phoneConfirmRequestMessage.Method = HttpMethod.Get;
-						phoneConfirmRequestMessage.RequestUri = new Uri(ConfigurationManager.AppSettings.Get("devUrl") + $"{Urls.ConfirmPhoneTestUrl}/{authUserInfo.UserId}");
+						phoneConfirmRequestMessage.RequestUri = new Uri($"{Urls.ConfirmPhoneTestUrl}/{authUserInfo.UserId}");
 						phoneConfirmRequestMessage.Headers.Add("TesterToken", testerToken);
 
 						var phoneConfirmResult = await baseHttpRequest.httpClient.SendAsync(phoneConfirmRequestMessage);
 						if (phoneConfirmResult.StatusCode == HttpStatusCode.OK)
 						{
-							var sessionService = new SessionService(authUserInfo.UserId);
-
-							await userProvider.СreateOrUpdateAuthStorageAsync(authUserInfo.UserId, authUserInfo.AccessToken, authUserInfo.RefreshToken);
-
-							await sessionService.MakeSessionAsync(authUserInfo.AccessToken, authUserInfo.RefreshToken);
-							await userProvider.CreateUserAsync(authUserInfo.UserId, LoginBox.Text, HashService.GetHash(PasswordBox.Password));
-
-							ContactsForm contact = new ContactsForm();
-							contact.Show();
-							Close();
+						//	var sessionService = new SessionService();
+							//await sessionService.MakeSessionAsync();
 						}
 						else
 							MessageBox.Show($"Something was error");
@@ -200,12 +189,14 @@ namespace Love.Dekstop
         {
 			var stateContainer = StateContainer.GetStateContainer();
 			stateContainer.registrationStateService.ChangeState();
-			
+            Thickness margin = Registration.Margin;
 			if (!stateContainer.registrationStateService.IsLogin)
             {
 				HaveAccount.Visibility = Visibility.Hidden;
 				EmailBox.Visibility = Visibility.Visible;
 				Registration.Content = "Login";
+                margin.Left = 35;
+                Registration.Margin = margin;
 				EnterType.Text = "Registration";
 				LoginButton.Content = "Registration";
             }
@@ -214,6 +205,8 @@ namespace Love.Dekstop
 				HaveAccount.Visibility = Visibility.Visible;
 				EmailBox.Visibility = Visibility.Hidden;
 				Registration.Content = "Registration";
+                margin.Left = 0;
+                Registration.Margin = margin;
 				EnterType.Text = "Login";
 				LoginButton.Content = "Login";
             }
