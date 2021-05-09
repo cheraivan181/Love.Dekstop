@@ -22,7 +22,7 @@ namespace Love.Providers
 
         public async Task<StrongKey> GetStrongKeyAsync(string id)
         {
-            var filter = new BsonDocument("UserId", id);
+            var filter = new BsonDocument("_id", id);
             var strongKey = await StrongKeys.Find(filter)
                 .FirstOrDefaultAsync();
 
@@ -36,7 +36,7 @@ namespace Love.Providers
 
         public async Task<Session> GetSessionAsync(string id)
         {
-            var filter = new BsonDocument("UserId", id);
+            var filter = new BsonDocument("_id", id);
             var session = await Sessions.Find(filter)
                 .FirstOrDefaultAsync();
 
@@ -45,14 +45,33 @@ namespace Love.Providers
 
         public async Task<AuthStorage> GetAuthStorageAsync(string id)
         {
-            var filter = new BsonDocument("UserId", id);
+            var filter = new BsonDocument("_id", id);
             var session = await AuthStorages.Find(filter)
                 .FirstOrDefaultAsync();
 
             return session;
         }
 
-        public async Task CreateAsync(string id, string acessToken, string refresh)
+        public async Task CreateStrongKeyAsync(string id, byte[] strongKey)
+        {
+            await StrongKeys.InsertOneAsync(new StrongKey() 
+            {
+                UserId = id,
+                Key = strongKey
+            });
+        }
+
+        public async Task CreateUserAsync(string id, string login, string hashPassword)
+        {
+            await Users.InsertOneAsync(new User()
+            {
+                Id = id,
+                Login = login,
+                Password = hashPassword
+            });
+        }
+
+        public async Task СreateOrUpdateAuthStorageAsync(string id, string acessToken, string refresh)
         {
             var authStorage = new AuthStorage()
             {
@@ -61,8 +80,9 @@ namespace Love.Providers
                 RefreshToken = refresh
             };
 
-            var filter = new BsonDocument("UserId", id);
-            var user = await Users.Find(filter)
+            var filter = new BsonDocument("_id", id);
+
+            var user = await AuthStorages.Find(filter)
                 .FirstOrDefaultAsync();
 
             if (user != null)
@@ -78,7 +98,7 @@ namespace Love.Providers
             string acessToken,
             string refreshToken)
         {
-            var filter = new BsonDocument("UserId", id);
+            var filter = new BsonDocument("_id", id);
             await AuthStorages.UpdateOneAsync(filter, Builders<AuthStorage>.Update.Set(x => x.AcessToken, acessToken)
                 .Set(x => x.RefreshToken, refreshToken));
         }

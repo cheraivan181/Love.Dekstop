@@ -50,6 +50,7 @@
     <Compile Include="Responses\AuthResult.cs" />
     <Compile Include="Responses\AuthUserInfo.cs" />
     <Compile Include="Responses\CreateFirstMessangerSessionResponse.cs" />
+    <Compile Include="Responses\StrongKeyResponse.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

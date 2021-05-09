@@ -18,6 +18,7 @@ namespace Love.Services.Http
         {
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings.Get("devUrl"));
+            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (compatible; AcmeInc/1.0)");
         }
 
         public HttpRequestMessage BuildRequestMessage(string uri,
