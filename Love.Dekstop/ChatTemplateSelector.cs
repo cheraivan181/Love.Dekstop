@@ -8,13 +8,9 @@ namespace Love.Dekstop
 {
     public class ChatTemplateSelector : DataTemplateSelector
     {
-        DataTemplate incomingDataTemplate;
-        DataTemplate outgoingDataTemplate;
 
         public ChatTemplateSelector()
         {
-            this.incomingDataTemplate = new DataTemplate(typeof(IncomingTemplate));
-            this.outgoingDataTemplate = new DataTemplate(typeof(OutgoingTemplate));
         }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)

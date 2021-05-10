@@ -151,7 +151,7 @@
                           x:Name="ScrollViewer"
                           VerticalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="ItemsControl" ItemsSource="{Binding }" ItemTemplateSelector="{StaticResource MessageTemplateSelector}">
-                   з
+                   
                 </ItemsControl>
             </ScrollViewer>
             <Grid Grid.Column="2" Grid.Row="2"  >
