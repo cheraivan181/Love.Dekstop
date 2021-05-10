@@ -56,7 +56,24 @@
             </Style.Setters>
         </Style>
 
+        <Style x:Key="OutcomingMessage">
+            <Style.Setters>
+                <Setter Property="Border.Padding" Value="80,10,10,10"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="IncomingMessage">
+            <Style.Setters>
+                <Setter Property="Border.Padding" Value="80,10,10,10"/>
+            </Style.Setters>
+        </Style>
+
+        <local:ChatTemplateSelector x:Key="MessageTemplateSelector"/>
+
     </Window.Resources>
+
+
+
 
     <Border Style="{StaticResource Screen}" Name="BackGround" Visibility="Visible">
         <Grid Grid.IsSharedSizeScope="True">
@@ -81,48 +98,49 @@
                 <TextBox Style="{StaticResource ResourceKey=TextBoxBase}" FontSize="12"
                          ClipToBounds="True"/>
             </StackPanel>
-            <ListBox Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" 
-                      x:Name="ContactsList" Background="#151515" 
+            <ListBox ItemsSource="{Binding}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" 
+                      x:Name="ContactsList" Background="#151515" SelectionChanged="ContactsList_OnSelectionChanged"
                       BorderThickness="0">
-            <ListBoxItem>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
                 <StackPanel Orientation="Horizontal">
                         
                     <StackPanel>
-                        <TextBlock Style="{StaticResource UserName}" Text="Pendos" ></TextBlock>
-                        <TextBlock Style="{StaticResource LastMessage}" Text="Last Message From Pendos"></TextBlock>
+                        <TextBlock Style="{StaticResource UserName}" Text="{Binding Path=Name}" ></TextBlock>
+                        <TextBlock Style="{StaticResource LastMessage}" Text="{Binding Path=LastMessage}"></TextBlock>
                     </StackPanel>
                 </StackPanel>
-                </ListBoxItem>
+                </DataTemplate>
+                </ListBox.ItemTemplate>
 
             </ListBox>
             <StackPanel Grid.Column="2" Grid.Row="0"  >
                 <TextBlock Style="{StaticResource HeadText}" >Pendos</TextBlock>
             </StackPanel>
-            <ScrollViewer Grid.Column="2" Grid.Row="1"  Background="Black">
-                <StackPanel>
-                    <Border Padding="10,10,80,10"  >
-                        <Grid>
-                            <Border Background="#151515" CornerRadius="10" Width="Auto">
-                                <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
+            <ScrollViewer Grid.Column="2" Grid.Row="1"  
+                          Background="Black" 
+                          x:Name="ScrollViewer"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="ItemsControl" ItemsSource="{Binding }" ItemTemplateSelector="{StaticResource MessageTemplateSelector}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Border x:Name="TemplateBorder"
+                                    Padding="10,10,80,10"  >
+                                    <Grid>
+                                        <Border Background="#151515" CornerRadius="10" Width="Auto">
+                                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
                                            Style="{StaticResource HeadText}"
-                                           Margin="0,0,30,0">
-                                    Zalupa
-                                </TextBlock>
-                            </Border>
-                        </Grid>
-                    </Border>
-                    <Border Padding="80,10,10,10" >
-                            <Grid>
-                                <Border Background="#353535" CornerRadius="10" Width="Auto">
-                                    <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
-                                               Style="{StaticResource HeadText}"
-                                               Margin="0,0,30,0">
-                                        Zalupa
-                                    </TextBlock>
+                                           Margin="0,0,30,0" Text="{Binding Path=Text}">
+                                    
+                                            </TextBlock>
+                                        </Border>
+                                    </Grid>
                                 </Border>
-                            </Grid>
-                        </Border>
-                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
             <Grid Grid.Column="2" Grid.Row="2"  >
                 <Grid.RowDefinitions>
