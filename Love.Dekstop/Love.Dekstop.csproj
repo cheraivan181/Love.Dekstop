@@ -17,7 +17,6 @@
   <ItemGroup>
     <None Remove="approved.png" />
     <None Remove="letter-x.png" />
-    <None Remove="pendos.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,7 +41,6 @@
   <ItemGroup>
     <Resource Include="approved.png" />
     <Resource Include="letter-x.png" />
-    <Resource Include="pendos.jpg" />
   </ItemGroup>
 
 </Project>

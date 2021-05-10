@@ -18,17 +18,14 @@ namespace Love.Dekstop
         }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
-        {
-            FrameworkElement element = container as FrameworkElement;
-          
+        {          
             var messageVm = item as TestMessage;
-            if (messageVm == null)
-                return null;
+            FrameworkElement elemnt = container as FrameworkElement;
 
             if (messageVm.Sender == ContactsForm.Iam)
-                return outgoingDataTemplate;
+                return elemnt.FindResource("Outgoing") as DataTemplate;
             else
-                return incomingDataTemplate;
+                return elemnt.FindResource("Incoming") as DataTemplate;
         }
     }
 }

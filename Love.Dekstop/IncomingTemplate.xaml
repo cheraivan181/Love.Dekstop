@@ -6,20 +6,19 @@
              xmlns:local="clr-namespace:Love.Dekstop"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-  
-    <StackPanel>
+    <DataTemplate>
+        <StackPanel>
         <Border x:Name="TemplateBorder"
                 Padding="80,10,10,10"  >
             <Grid>
                 <Border Background="#151515" CornerRadius="10" Width="Auto">
-                    <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
+                        <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
                                FontWeight="Bold" Foreground="White"
-                               Margin="0,0,30,0" Text="Zalupa">
-
-                    </TextBlock>
+                               Margin="0,0,30,0" Text="{Binding Path=Text}">
+                        </TextBlock>
                 </Border>
             </Grid>
         </Border>
     </StackPanel>
-
+    </DataTemplate> 
 </UserControl>

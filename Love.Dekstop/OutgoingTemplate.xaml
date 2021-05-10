@@ -15,7 +15,7 @@
                 <Border Background="#151515" CornerRadius="10" Width="Auto">
                     <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
                                FontWeight="Bold"
-                               Margin="0,0,30,0" Text="Zalupa">
+                               Margin="0,0,30,0" Text="{Binding Path=Text}">
 
                     </TextBlock>
                 </Border>

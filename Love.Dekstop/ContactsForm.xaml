@@ -8,6 +8,38 @@
         Title="Zalupa" Height="450" Width="800">
 
     <Window.Resources>
+        <DataTemplate x:Key="Incoming">
+            <StackPanel>
+                <Border x:Name="TemplateBorder"
+                Padding="80,10,10,10"  >
+                    <Grid>
+                        <Border Background="#151515" CornerRadius="10" Width="Auto">
+                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
+                               FontWeight="Bold" Foreground="White"
+                               Margin="0,0,30,0" Text="{Binding Path=Text}">
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="Outgoing">
+            <StackPanel>
+                <Border x:Name="TemplateBorder"
+                Padding="10,10,80,10"  >
+                    <Grid>
+                        <Border Background="#151515" CornerRadius="10" Width="Auto">
+                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
+                               FontWeight="Bold"
+                               Margin="0,0,30,0" Text="{Binding Path=Text}">
+
+                            </TextBlock>
+                        </Border>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </DataTemplate>
+
         <Style x:Key="Screen">
             <Style.Setters>
                 <Setter Property="Border.Visibility" Value="Hidden" />
@@ -72,9 +104,6 @@
 
     </Window.Resources>
 
-
-
-
     <Border Style="{StaticResource Screen}" Name="BackGround" Visibility="Visible">
         <Grid Grid.IsSharedSizeScope="True">
             <Grid.ColumnDefinitions>
@@ -122,24 +151,7 @@
                           x:Name="ScrollViewer"
                           VerticalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="ItemsControl" ItemsSource="{Binding }" ItemTemplateSelector="{StaticResource MessageTemplateSelector}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Border x:Name="TemplateBorder"
-                                    Padding="10,10,80,10"  >
-                                    <Grid>
-                                        <Border Background="#151515" CornerRadius="10" Width="Auto">
-                                            <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
-                                           Style="{StaticResource HeadText}"
-                                           Margin="0,0,30,0" Text="{Binding Path=Text}">
-                                    
-                                            </TextBlock>
-                                        </Border>
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                   з
                 </ItemsControl>
             </ScrollViewer>
             <Grid Grid.Column="2" Grid.Row="2"  >
