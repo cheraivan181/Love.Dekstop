@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,7 @@ namespace Love.Dekstop
     public partial class CreateDialogRequest : Window
     {
         private ObservableCollection<RequstedContact> newRequsts;
-        private ObservableCollection<RequstedContact> sendedRequsts;
+        private ObservableCollection<RequstedContact> sendedRequsts = new ObservableCollection<RequstedContact>();
         public CreateDialogRequest()
         {
             InitializeComponent();
@@ -40,15 +41,25 @@ namespace Love.Dekstop
                 MessageBoxImage.Information);
         }
 
-        public class RequstedContact
-        {
-            public string Name { get; set; }
-        }
+
 
         public void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Name, "На хуй это читать", MessageBoxButton.OK,
+            Button cmd = (Button)sender;
+            if (cmd.DataContext is RequstedContact)
+            {
+                RequstedContact selectedContact = (RequstedContact)cmd.DataContext;
+
+                MessageBox.Show(selectedContact.Name, "На хуй это читать", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                sendedRequsts.Add(selectedContact);
+            }
+            MessageBox.Show(sendedRequsts.FirstOrDefault().Name+" это из списка отправленых запросов", "На хуй это читать", MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }
+    }
+    public class RequstedContact
+    {
+        public string Name { get; set; }
     }
 }

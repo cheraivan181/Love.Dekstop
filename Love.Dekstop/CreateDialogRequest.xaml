@@ -77,7 +77,7 @@
                 <Image Source="Daco_5360103.png"></Image>
             </Button>
             <ListBox x:Name="RequstList"  Height="237" Width="288" Margin="0,20,0,0" ItemsSource="{Binding}"
-                     Background="#151515"  >
+                     Background="#151515" IsSynchronizedWithCurrentItem="True" >
                 <ListBox.ItemTemplate>
                     <DataTemplate >
                         <Grid
@@ -92,7 +92,7 @@
                                     <TextBlock x:Name="DataBlock" Grid.Column="0" Style="{StaticResource UserName}" Text="{Binding Name}" Margin="10,0" />
                                 <Button Grid.Column="1" FontSize="14" Background="#333" 
                                         BorderThickness="0" Click="ButtonBase_OnClick" Width="30" 
-                                        HorizontalAlignment="Right" DataContext="" >
+                                        HorizontalAlignment="Right">
                                     +
                                 </Button>
                                 </Grid>
