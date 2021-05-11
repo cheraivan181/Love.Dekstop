@@ -1,0 +1,111 @@
+﻿<Window x:Class="Love.Dekstop.CreateDialogRequest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Love.Dekstop"
+        mc:Ignorable="d"
+        Title="CreateDialogRequest" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="Screen">
+            <Style.Setters>
+                <Setter Property="Border.Visibility" Value="Visible" />
+                <Setter Property="Border.Background" Value="#151515" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="TextBoxBase">
+            <Style.Setters>
+                <Setter Property="TextBox.Background" Value="#333" />
+                <Setter Property="TextBox.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBox.Margin" Value="5"/>
+                <Setter Property="TextBox.Padding" Value="15 10"/>
+                <Setter Property="TextBox.HorizontalAlignment" Value="Center" />
+                <Setter Property="TextBox.Width" Value="250" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="TextBlockBase">
+            <Style.Setters>
+                <Setter Property="TextBlock.Padding" Value="5"/>
+                <Setter Property="TextBlock.Margin" Value="5" />
+                <Setter Property="TextBlock.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBlock.FontSize" Value="14" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="HeaderBlock" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                <Setter Property="TextBlock.FontSize" Value="18" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="LastMessage" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.Foreground" Value="Gray" />
+                <Setter Property="TextBlock.Padding"  Value="5,0,0,0"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="UserName" BasedOn="{StaticResource LastMessage}">
+            <Style.Setters>
+                <Setter Property="TextBlock.FontSize" Value="12"></Setter>
+                <Setter Property="TextBlock.Foreground"  Value="#f6f6f6"/>
+                <Setter Property="TextBlock.Padding"  Value="5,0,0,10"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ButtonBase" >
+            <Style.Setters>
+                <Setter Property="Button.Background" Value="#333" />
+                <Setter Property="Button.Foreground" Value="#f6f6f6" />
+                <Setter Property="Button.Margin" Value="5"/>
+                <Setter Property="Button.Padding" Value="50 10"/>
+                <Setter Property="Button.HorizontalAlignment" Value="Center" />
+                <Setter Property="Button.FontSize" Value="14" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Border Style="{StaticResource Screen}" Margin="0,0,0,0">
+        <StackPanel>
+            <Label Style="{StaticResource HeaderBlock}" Content="CreateNewDialog" HorizontalAlignment="Center" Width="192"/>
+            <TextBox Style="{StaticResource TextBoxBase}"></TextBox>
+            <Button Style="{StaticResource ButtonBase}" 
+                    HorizontalAlignment="Left" Margin="200,-45,0,0"
+                    Width="40" Height="35" Padding="3">
+                <Image Source="Daco_5360103.png"></Image>
+            </Button>
+            <ListBox x:Name="RequstList"  Height="237" Width="288" Margin="0,20,0,0" ItemsSource="{Binding}"
+                     Background="#151515"  >
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <Grid
+                            VerticalAlignment="Stretch">
+                            <Border  Background="#333" VerticalAlignment="Stretch"
+                                     Width="274">
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock x:Name="DataBlock" Grid.Column="0" Style="{StaticResource UserName}" Text="{Binding Name}" Margin="10,0" />
+                                <Button Grid.Column="1" FontSize="14" Background="#333" 
+                                        BorderThickness="0" Click="ButtonBase_OnClick" Width="30" 
+                                        HorizontalAlignment="Right" DataContext="" >
+                                    +
+                                </Button>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"/>
+            <Button x:Name="Back_Button" Click="Back_Button_OnClick"
+                Style="{StaticResource ButtonBase}" Width="288" Margin="0,20" Content="Go Back"/>
+        </StackPanel>
+    </Border>
+
+</Window>

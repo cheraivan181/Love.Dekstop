@@ -13,7 +13,7 @@
                 <Border x:Name="TemplateBorder"
                 Padding="80,10,10,10"  >
                     <Grid>
-                        <Border Background="#151515" CornerRadius="10" Width="Auto">
+                        <Border Background="#151515" CornerRadius="10" Width="Auto" Padding="10">
                             <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
                                FontWeight="Bold" Foreground="White"
                                Margin="0,0,30,0" Text="{Binding Path=Text}">
@@ -28,9 +28,9 @@
                 <Border x:Name="TemplateBorder"
                 Padding="10,10,80,10"  >
                     <Grid>
-                        <Border Background="#151515" CornerRadius="10" Width="Auto">
+                        <Border Background="#151515" CornerRadius="10" Width="Auto" Padding="10">
                             <TextBlock VerticalAlignment="Center" TextWrapping="Wrap" 
-                               FontWeight="Bold"
+                               FontWeight="Bold" Foreground="Gray"
                                Margin="0,0,30,0" Text="{Binding Path=Text}">
 
                             </TextBlock>
@@ -39,6 +39,17 @@
                 </Border>
             </StackPanel>
         </DataTemplate>
+
+        <Style x:Key="ButtonBase" >
+            <Style.Setters>
+                <Setter Property="Button.Background" Value="#333" />
+                <Setter Property="Button.Foreground" Value="#f6f6f6" />
+                <Setter Property="Button.Margin" Value="5"/>
+                <Setter Property="Button.Padding" Value="50 10"/>
+                <Setter Property="Button.HorizontalAlignment" Value="Center" />
+                <Setter Property="Button.FontSize" Value="14" />
+            </Style.Setters>
+        </Style>
 
         <Style x:Key="Screen">
             <Style.Setters>
@@ -127,7 +138,7 @@
                 <TextBox Style="{StaticResource ResourceKey=TextBoxBase}" FontSize="12"
                          ClipToBounds="True"/>
             </StackPanel>
-            <ListBox ItemsSource="{Binding}" Grid.RowSpan="2" Grid.Row="1" Grid.Column="0" 
+            <ListBox ItemsSource="{Binding}" Grid.Row="1" Grid.Column="0" 
                       x:Name="ContactsList" Background="#151515" SelectionChanged="ContactsList_OnSelectionChanged"
                       BorderThickness="0">
             <ListBox.ItemTemplate>
@@ -162,8 +173,25 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="0.1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxBase}" HorizontalAlignment="Stretch"></TextBox>
-                <Button Grid.Column="1" Grid.Row="0" Width="20" Height="20" ></Button>
+                <TextBox Grid.Column="0" Grid.Row="0" Style="{StaticResource TextBoxBase}"
+                         x:Name="NewMsgTextBox" HorizontalAlignment="Stretch"></TextBox>
+                <Button Grid.Column="1" Grid.Row="0" Width="20" Height="20"
+                        x:Name="SendMsgBtn" Click="SendMsgBtn_OnClick" ></Button>
+            </Grid>
+            <Grid Grid.Column="0" Grid.Row="2" >
+
+                <Button Margin="5" HorizontalAlignment="Center" Width="50"
+                        Background="#333333">
+                    <Image Source="svg-3-512.png"></Image>
+                </Button>
+                <Button Margin="130 ,5, 5, 5" Width="50" HorizontalAlignment="Center"
+                        Background="#333333" Padding="4">
+                    <Image Source="PinClipart.com_fall-back-clip-art_5440422.png"></Image>
+                </Button>
+                <Button  Margin="5 ,5, 130, 5" Width="50"
+                         HorizontalAlignment="Center" Background="#333333" >
+                        <Image Source="17667675471535801676-128.png"></Image>
+                </Button >
             </Grid>
         </Grid>
     </Border>

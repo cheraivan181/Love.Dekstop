@@ -57,6 +57,15 @@ namespace Love.Dekstop
             selectedMessages = selectedContact.Messages;
             ItemsControl.ItemsSource = selectedMessages;
         }
+
+        public void SendMsgBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (NewMsgTextBox.Text != null && NewMsgTextBox.Text != "")
+            {
+                selectedMessages.Add(new TestMessage(){Sender = Iam,Text = NewMsgTextBox.Text});
+                NewMsgTextBox.Text = "";
+            }
+        }
     }
 
     public class TestContacts
