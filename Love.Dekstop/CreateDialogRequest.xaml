@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Love.Dekstop"
         mc:Ignorable="d"
-        Title="CreateDialogRequest" Height="450" Width="800">
+        Title="CreateDialogRequest" Height="500" Width="400" Background="#151515" >
     <Window.Resources>
         <Style x:Key="Screen">
             <Style.Setters>
@@ -68,12 +68,13 @@
         </Style>
     </Window.Resources>
     <Border Style="{StaticResource Screen}" Margin="0,0,0,0">
-        <StackPanel>
+
+        <StackPanel Margin="0,20,0,0">
             <Label Style="{StaticResource HeaderBlock}" Content="CreateNewDialog" HorizontalAlignment="Center" Width="192"/>
-            <TextBox Style="{StaticResource TextBoxBase}"></TextBox>
+            <TextBox Style="{StaticResource TextBoxBase}" Margin="30,0,0,0"></TextBox>
             <Button Style="{StaticResource ButtonBase}" 
-                    HorizontalAlignment="Left" Margin="200,-45,0,0"
-                    Width="40" Height="35" Padding="3">
+                    HorizontalAlignment="Left" Margin="30,-40,0,0"
+                    Width="30" Height="30" Padding="3">
                 <Image Source="Daco_5360103.png"></Image>
             </Button>
             <ListBox x:Name="RequstList"  Height="237" Width="288" Margin="0,20,0,0" ItemsSource="{Binding}"
@@ -90,11 +91,11 @@
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <TextBlock x:Name="DataBlock" Grid.Column="0" Style="{StaticResource UserName}" Text="{Binding Name}" Margin="10,0" />
-                                <Button Grid.Column="1" FontSize="14" Background="#333" 
+                                    <Button Grid.Column="1" FontSize="14" Background="#333" 
                                         BorderThickness="0" Click="ButtonBase_OnClick" Width="30" 
                                         HorizontalAlignment="Right">
-                                    +
-                                </Button>
+                                        +
+                                    </Button>
                                 </Grid>
                             </Border>
                         </Grid>
@@ -104,7 +105,7 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"/>
             <Button x:Name="Back_Button" Click="Back_Button_OnClick"
-                Style="{StaticResource ButtonBase}" Width="288" Margin="0,20" Content="Go Back"/>
+                Style="{StaticResource ButtonBase}" Width="288" Margin="0,10" Content="Go Back"/>
         </StackPanel>
     </Border>
 

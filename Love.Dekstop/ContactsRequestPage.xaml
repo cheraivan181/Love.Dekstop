@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Love.Dekstop"
         mc:Ignorable="d"
-        Title="ContactsRequestPage" Height="500" Width="800">
+        Title="ContactsRequestPage" Height="500" Width="430">
     <Window.Resources>
         <Style x:Key="Screen">
             <Style.Setters>
@@ -58,7 +58,7 @@
     </Window.Resources>
     <Border Style="{StaticResource Screen}" Margin="0,0,0,0">
         <StackPanel>
-        <Label Style="{StaticResource HeaderBlock}" Content="New Dialogs Request" Margin="0,29,0,0" Width="193"/>
+        <Label Style="{StaticResource HeaderBlock}" Content="New Dialogs Request" Margin="0,19,0,0" Width="193"/>
             <ListBox x:Name="RequstList"  Height="288" Width="302" ItemsSource="{Binding}"
                      Background="#151515"   SelectionChanged="RequstList_OnSelectionChanged">
                 <ListBox.ItemTemplate>
