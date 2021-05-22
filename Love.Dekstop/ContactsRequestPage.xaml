@@ -1,0 +1,98 @@
+﻿<Window x:Class="Love.Dekstop.ContactsRequestPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Love.Dekstop"
+        mc:Ignorable="d"
+        Title="ContactsRequestPage" Height="500" Width="430">
+    <Window.Resources>
+        <Style x:Key="Screen">
+            <Style.Setters>
+                <Setter Property="Border.Visibility" Value="Visible" />
+                <Setter Property="Border.Background" Value="#151515" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="TextBlockBase">
+            <Style.Setters>
+                <Setter Property="TextBlock.Padding" Value="5"/>
+                <Setter Property="TextBlock.Margin" Value="5" />
+                <Setter Property="TextBlock.Foreground" Value="#f6f6f6" />
+                <Setter Property="TextBlock.FontSize" Value="14" />
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="HeaderBlock" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.HorizontalAlignment" Value="Center"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                <Setter Property="TextBlock.FontSize" Value="18" />
+            </Style.Setters>
+        </Style>
+        <Style x:Key="LastMessage" BasedOn="{StaticResource TextBlockBase}">
+            <Style.Setters>
+                <Setter Property="TextBlock.Foreground" Value="Gray" />
+                <Setter Property="TextBlock.Padding"  Value="5,0,0,0"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="UserName" BasedOn="{StaticResource LastMessage}">
+            <Style.Setters>
+                <Setter Property="TextBlock.FontSize" Value="12"></Setter>
+                <Setter Property="TextBlock.Foreground"  Value="#f6f6f6"/>
+                <Setter Property="TextBlock.Padding"  Value="5,0,0,10"/>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ButtonBase" >
+            <Style.Setters>
+                <Setter Property="Button.Background" Value="#333" />
+                <Setter Property="Button.Foreground" Value="#f6f6f6" />
+                <Setter Property="Button.Margin" Value="5"/>
+                <Setter Property="Button.Padding" Value="50 10"/>
+                <Setter Property="Button.HorizontalAlignment" Value="Center" />
+                <Setter Property="Button.FontSize" Value="14" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Border Style="{StaticResource Screen}" Margin="0,0,0,0">
+        <StackPanel>
+        <Label Style="{StaticResource HeaderBlock}" Content="New Dialogs Request" Margin="0,19,0,0" Width="193"/>
+            <ListBox x:Name="RequstList"  Height="288" Width="302" ItemsSource="{Binding}"
+                     Background="#151515"   SelectionChanged="RequstList_OnSelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate >
+                        <Grid
+                            VerticalAlignment="Stretch">
+                            <Border  Background="#333" VerticalAlignment="Stretch"
+                                     Width="288">
+                            <TextBlock Style="{StaticResource UserName}" Text="{Binding Path=Name}"  HorizontalAlignment="Stretch"/>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                
+                <Button x:Name="Deny_Button" Click="Deny_Button_OnClick"
+                    Style="{StaticResource ButtonBase}">
+                    <Image Source="letter-x.png"></Image>
+                </Button>
+                <Button x:Name="Aply_Button" Click="Aply_Button_OnClick"
+                    Style="{StaticResource ButtonBase}">
+                    <Image
+                        Height="40"
+                        Width="50"
+                        Source="approved.png"></Image>
+                </Button>
+
+            </StackPanel>
+        <Button x:Name="Back_Button" Click="Back_Button_OnClick"
+                Style="{StaticResource ButtonBase}" Width="288">
+           Go Back
+        </Button>
+        </StackPanel>
+    </Border>
+</Window>

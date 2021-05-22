@@ -12,9 +12,18 @@ using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Love.Dekstop
 {
@@ -86,7 +95,6 @@ namespace Love.Dekstop
 
 					ContactsForm contactForm = new ContactsForm();
 					contactForm.Show();
-					Close();
 				}
 				else
                 {
@@ -224,12 +232,14 @@ namespace Love.Dekstop
         {
 			var stateContainer = StateContainer.GetStateContainer();
 			stateContainer.registrationStateService.ChangeState();
-			
+            Thickness margin = Registration.Margin;
 			if (!stateContainer.registrationStateService.IsLogin)
             {
 				HaveAccount.Visibility = Visibility.Hidden;
 				EmailBox.Visibility = Visibility.Visible;
 				Registration.Content = "Login";
+                margin.Left = 35;
+                Registration.Margin = margin;
 				EnterType.Text = "Registration";
 				LoginButton.Content = "Registration";
             }
@@ -238,6 +248,8 @@ namespace Love.Dekstop
 				HaveAccount.Visibility = Visibility.Visible;
 				EmailBox.Visibility = Visibility.Hidden;
 				Registration.Content = "Registration";
+                margin.Left = 0;
+                Registration.Margin = margin;
 				EnterType.Text = "Login";
 				LoginButton.Content = "Login";
             }

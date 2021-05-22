@@ -15,9 +15,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="17667675471535801676-128.png" />
+    <None Remove="approved.png" />
+    <None Remove="Daco_5360103.png" />
+    <None Remove="letter-x.png" />
+    <None Remove="PinClipart.com_fall-back-clip-art_5440422.png" />
+    <None Remove="svg-3-512.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="5.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.12.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +41,15 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\Ivan\.nuget\packages\newtonsoft.json\13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="17667675471535801676-128.png" />
+    <Resource Include="approved.png" />
+    <Resource Include="Daco_5360103.png" />
+    <Resource Include="letter-x.png" />
+    <Resource Include="PinClipart.com_fall-back-clip-art_5440422.png" />
+    <Resource Include="svg-3-512.png" />
   </ItemGroup>
 
 </Project>
