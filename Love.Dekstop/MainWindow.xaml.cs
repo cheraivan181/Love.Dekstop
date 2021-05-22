@@ -95,6 +95,7 @@ namespace Love.Dekstop
 
 					ContactsForm contactForm = new ContactsForm();
 					contactForm.Show();
+					Close();
 				}
 				else
                 {

@@ -71,7 +71,6 @@ namespace Love.Dekstop
                 new TestContacts(){Name="Peder",LastMessage = "Ya daun"},
             };
             ContactsList.ItemsSource = contacts;
-            
         }
 
         private void ContactsList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
