@@ -17,5 +17,6 @@ namespace Love.Utils
         public static string CreateFirstSessionUrl = "MessangerSession/createfirstsession";
         public static string CreateSessionUrl = "MessangerSession/createsession";
         public static string GetStrongKeyUrl = "MessangerSession/getstrongkey";
+        public static string SetServerSessionUrl = "MessangerSession/setsession/";
     }
 }

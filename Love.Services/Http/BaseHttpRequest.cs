@@ -69,10 +69,7 @@ namespace Love.Services.Http
             return response;
         }
 
-        public async Task MakeSimpleRequestAsync()
-        {
-            return;
-        }
+        
 
         public async Task<T> MakeRequestAsync<T>(string url, HttpMethod method, string body)
         {

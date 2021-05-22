@@ -67,7 +67,7 @@ namespace Love.Dekstop
             {
 				var users = await userProvider.GetAllUsersAsync();
 				var currentUser = users.FirstOrDefault(x => x.Login == LoginBox.Text && x.Password == HashService.GetHash(PasswordBox.Password));
-
+				
 				if (currentUser != null)
 				{
 					var strongKey = await userProvider.GetStrongKeyAsync(currentUser.Id);
@@ -79,7 +79,10 @@ namespace Love.Dekstop
 
 					stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
 						clientPublicKey: session.ClientPublicKey, serverPublicKey: session.ServerPublicKey,
-						acessToken: acessToken);
+						acessToken: acessToken, userId: currentUser.Id);
+
+					var sessionService = new SessionService(currentUser.Id);
+					await sessionService.SetSessionAsync(acessToken);
 
 					ContactsForm contactForm = new ContactsForm();
 					contactForm.Show();
@@ -126,6 +129,16 @@ namespace Love.Dekstop
 							await sessionService.MakeSessionAsync(authResult.AccessToken, authResult.RefreshToken);
 
 							await userProvider.CreateUserAsync(authResult.UserId, LoginBox.Text, HashService.GetHash(PasswordBox.Password));
+
+							var strongKey = await userProvider.GetStrongKeyAsync(authResult.UserId);
+							var session = await userProvider.GetSessionAsync(authResult.UserId);
+							var authStorage = await userProvider.GetAuthStorageAsync(authResult.UserId);
+
+							stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
+								clientPublicKey: session.ClientPublicKey, serverPublicKey: session.ServerPublicKey,
+								acessToken: authStorage.AcessToken, userId: currentUser.Id);
+
+							await sessionService.SetSessionAsync(authStorage.AcessToken);
 
 							ContactsForm contactForm = new ContactsForm();
 							contactForm.Show();
@@ -175,6 +188,17 @@ namespace Love.Dekstop
 
 							await sessionService.MakeSessionAsync(authUserInfo.AccessToken, authUserInfo.RefreshToken);
 							await userProvider.CreateUserAsync(authUserInfo.UserId, LoginBox.Text, HashService.GetHash(PasswordBox.Password));
+
+							var strongKey = await userProvider.GetStrongKeyAsync(authUserInfo.UserId);
+							var session = await userProvider.GetSessionAsync(authUserInfo.UserId);
+							var authStorage = await userProvider.GetAuthStorageAsync(authUserInfo.UserId);
+
+							stateContainer.sessionStateService.SetStateAsync(strongKey: strongKey.Key, clientPrivateKey: session.ClientPrivateKey,
+								clientPublicKey: session.ClientPublicKey, serverPublicKey: session.ServerPublicKey,
+								acessToken: authStorage.AcessToken, userId: authUserInfo.UserId);
+
+
+							await sessionService.SetSessionAsync(authUserInfo.UserId);
 
 							ContactsForm contact = new ContactsForm();
 							contact.Show();

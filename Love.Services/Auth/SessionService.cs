@@ -4,6 +4,7 @@ using Love.Models.Responses;
 using Love.Providers;
 using Love.Services.Crypt;
 using Love.Services.Http;
+using Love.Services.StateServices;
 using Love.Utils;
 using Newtonsoft.Json;
 using System;
@@ -133,6 +134,19 @@ namespace Love.Services.Auth
                     SessionId = decryptedSessionId
                 });
             }
+        }
+
+        public async Task SetSessionAsync(string acessToken)
+        {
+            var authRequest = new AuthRequest(acessToken);
+            var session = await userProvider.GetSessionAsync(UserId);
+            var aes = new AesCrypt();
+
+            var stateContainer = StateContainer.GetStateContainer();
+
+            string cryptedSession = aes.Crypt(stateContainer.sessionStateService.StrongKey, session.SessionId);
+
+            await authRequest.MakeRequestAsync(ConfigurationManager.AppSettings.Get("devUrl") + Urls.SetServerSessionUrl + cryptedSession, HttpMethod.Get, null);
         }
     }
 }
